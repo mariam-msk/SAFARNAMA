@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title%}Travel Storyteller{%endblock%}
+
+{%block content%}
+<div class="chat-main">
+  <div class="chat-container">
+    <div class="chat-box" id="chat-box">
+      <div class="bot-message">Hi there, fellow traveler! Tell me which tourist attraction you'd like to explore, and I'll create an immersive travel narrative just for you. Try places like "Lahore Fort" or "Grand Canyon"</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="user-input" placeholder="Where would you like to explore?">
+      <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBox = document.getElementById('chat-box');
+
+    
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'bot-message loading';
+    loadingDiv.innerHTML = '<div class="loading-dots"><span>.</span><span>.</span><span>.</span></div>';
+    
+    
+    const userMsg = document.createElement('div');
+    userMsg.className = 'user-message';
+    userMsg.textContent = message;
+    chatBox.appendChild(userMsg);
+    
+    
+    chatBox.appendChild(loadingDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    
+    input.value = '';
+    input.disabled = true; 
+
+    try {
+      
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      
+      
+      chatBox.removeChild(loadingDiv);
+      
+      
+      const botMsg = document.createElement('div');
+      botMsg.className = 'bot-message';
+      botMsg.textContent = data.reply;
+      chatBox.appendChild(botMsg);
+    } catch (error) {
+      
+      chatBox.removeChild(loadingDiv);
+      
+      
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'bot-message error';
+      errorMsg.textContent = "Sorry, I couldn't generate your travel story. Please try again later.";
+      chatBox.appendChild(errorMsg);
+    } finally {
+      input.disabled = false; 
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  }
+  
+  
+  document.getElementById('user-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  });
+</script>
+
+{%endblock%}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Cedarville+Cursive&family=Creepster&family=Inconsolata&family=Luckiest+Guy&family=MedievalSharp&family=Playball&family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Cedarville+Cursive&family=Creepster&family=Graduate&family=Inconsolata&family=Luckiest+Guy&family=MedievalSharp&family=Merienda&family=Nova+Mono&family=Playball&family=Playfair+Display&family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo&family=Cedarville+Cursive&family=Creepster&family=Graduate&family=Inconsolata&family=Luckiest+Guy&family=MedievalSharp&family=Merienda&family=Nova+Mono&family=Playball&family=Playfair+Display&family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <title>SAFARNAMA</title>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="dropdown">
+      <button class="dropbtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="dropdown-content">
+        <a id="home" href="/home">Home</a>
+        <a id="chatbot" href="/chatbot">ChatBot</a>
+        <a id="route" href="/route">Route</a>
+      </div>
+    </div> 
+  </div>
+  {% block content%}
+  {%endblock%}
+
+</body>
+</html>
